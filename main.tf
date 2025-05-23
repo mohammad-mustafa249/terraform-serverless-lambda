@@ -27,7 +27,7 @@ resource "aws_internet_gateway" "gw" {
 
 resource "aws_eip" "nat" {
  count = 1
- vpc = true
+ domain = "vpc"
 }
 
 resource "aws_nat_gateway" "nat" {
