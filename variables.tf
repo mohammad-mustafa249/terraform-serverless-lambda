@@ -1,7 +1,7 @@
-varibale "region" {
+variable "region" {
   default = "us-east-1"
 }
 
-varibale "image_uri" {
+variable "image_uri" {
   description = " ECR image URI for the lambda container"
 }
