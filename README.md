@@ -1,4 +1,4 @@
-# Terraform: Serverless Container Infrastructure on AWS
+# *Terraform: Serverless Container Infrastructure on AWS*
 
 This repo provisions a serverless infrastructure using **Terraform**, deploying a **container-based Lambda function** behind **API Gateway**, inside a **VPC with public/private subnets**.
 
@@ -80,7 +80,7 @@ The IAM user or role running Terraform must have the following permissions:
 - `ecr:UploadLayerPart`
 - `ecr:CompleteLayerUpload`
 
- Alternatively, you can attach these AWS Managed Policies:
+ ## Alternatively, you can attach these AWS Managed Policies:
 
 - `AmazonEC2FullAccess`
 - `AmazonVPCFullAccess`
@@ -101,26 +101,50 @@ The IAM user or role running Terraform must have the following permissions:
 
 ---
 
-## 🧪 Step-by-Step Deployment
+## Step-by-Step Deployment
 
-### 1️⃣ Clone the Repo
+## Clone the Repo
 
-```bash
 git clone https://github.com/<your-user>/terraform-serverless-container.git
 cd terraform-serverless-container
 
+## Build and Push Docker Image to ECR
 
- Build and Push Docker Image to ECR
-
-
-a. Create ECR Repo
+## a. Create ECR Repo
 aws ecr create-repository --repository-name lambda-container-demo
 
-b. Authenticate Docker to ECR
+## b. Authenticate Docker to ECR
 aws ecr get-login-password | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
 
-c. Build and Push Image
+## c. Build and Push Image
 cd lambda_container
 docker build -t lambda-container-demo .
 docker tag lambda-container-demo:latest <aws_account_id>.dkr.ecr.<region>.amazonaws.com/lambda-container-demo:latest
 docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/lambda-container-demo:latest
+
+## Deploy with Terraform
+
+terraform init
+terraform plan
+terraform apply
+
+## Confirm when prompted.
+
+# Test the Lambda Function
+Get the API Gateway URL from the output and test it:
+curl https://<api-id>.execute-api.<region>.amazonaws.com/
+
+## Expected Output 
+"Hello from Lambda container!"
+
+##Clean up 
+terraform destroy
+
+##Directory Structure 
+terraform-serverless-container/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── lambda_container/
+│ ├── Dockerfile
+│ └── app.py
