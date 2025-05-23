@@ -138,10 +138,13 @@ curl https://<api-id>.execute-api.<region>.amazonaws.com/
 "Hello from Lambda container!"
 
 ##Clean up 
+
 terraform destroy
 
 ##Directory Structure 
+
 terraform-serverless-container/
+
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
