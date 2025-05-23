@@ -110,13 +110,13 @@ cd terraform-serverless-container
 
 ## Build and Push Docker Image to ECR
 
-## a. Create ECR Repo
+### a. Create ECR Repo
 aws ecr create-repository --repository-name lambda-container-demo
 
-## b. Authenticate Docker to ECR
+### b. Authenticate Docker to ECR
 aws ecr get-login-password | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
 
-## c. Build and Push Image
+### c. Build and Push Image
 cd lambda_container
 docker build -t lambda-container-demo .
 docker tag lambda-container-demo:latest <aws_account_id>.dkr.ecr.<region>.amazonaws.com/lambda-container-demo:latest
@@ -128,7 +128,7 @@ terraform init
 terraform plan
 terraform apply
 
-## Confirm when prompted.
+### Confirm when prompted.
 
 # Test the Lambda Function
 Get the API Gateway URL from the output and test it:
