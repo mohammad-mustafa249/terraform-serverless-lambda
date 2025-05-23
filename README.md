@@ -137,17 +137,6 @@ curl https://<api-id>.execute-api.<region>.amazonaws.com/
 ## Expected Output 
 "Hello from Lambda container!"
 
-##Clean up 
+## Clean up 
 
 terraform destroy
-
-##Directory Structure 
-
-terraform-serverless-container/
-
-├── main.tf
-├── variables.tf
-├── outputs.tf
-├── lambda_container/
-│ ├── Dockerfile
-│ └── app.py
